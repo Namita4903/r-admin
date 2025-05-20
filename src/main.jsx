@@ -2,7 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "../src/page/admin";
  import Dashboard from '../src/page/dashboard';
 import Doctors from "../src/page/doctors";

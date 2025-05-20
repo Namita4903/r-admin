@@ -12,7 +12,6 @@ import {
   DatePicker,
 } from "antd";
 import dayjs from "dayjs";
-import { apiUrl } from "../../../config";
 
 const { Option } = Select;
 
