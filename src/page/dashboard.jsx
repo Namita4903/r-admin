@@ -49,12 +49,12 @@ const Dashboard = () => {
     // setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5001/api/auth/getUsers", {
+      const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getUsers", {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(response)
       setUsers(response.data);
-      //  const response1 = await axios.get("http://localhost:5001/api/auth/getUserReport", {
+      //  const response1 = await axios.get("https://r-backend-2.onrender.com/api/auth/getUserReport", {
       //   headers: { Authorization: `Bearer ${token}` },
       // });
       // setReports(response1.data);
@@ -71,7 +71,7 @@ const Dashboard = () => {
   const fetchReports = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5001/api/report/getAllReports"
+        "https://r-backend-2.onrender.com/api/report/getAllReports"
       );
     //   const formatted = response.data.map((report, index) => ({
     //     key: report._id || index,
@@ -90,7 +90,7 @@ const Dashboard = () => {
   const fetchUserAppointments = async () => {
   try {
 
-    const response = await axios.get("http://localhost:5001/api/auth/getAppointment");
+    const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getAppointment");
 
     console.log("User appointments:", response.data);
     setAppointments(response.data)

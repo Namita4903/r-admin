@@ -12,7 +12,7 @@ const AdminAppointments = () => {
   const fetchAppointments = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5001/api/auth/getAppointment");
+      const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getAppointment");
 
       const { appointments } = response.data;
 

@@ -112,7 +112,7 @@
 //   const fetchReports = async () => {
 //     setLoading(true);
 //     try {
-//       const response = await axios.get("http://localhost:5001/api/report/getAllReports");
+//       const response = await axios.get("https://r-backend-2.onrender.com/api/report/getAllReports");
 //       const formatted = response.data.map((report, index) => ({
 //         key: report._id || index,
 //         ...report,
@@ -139,7 +139,7 @@
 //   // Handle delete
 //   const handleDelete = async (record) => {
 //     try {
-//       await axios.delete(`http://localhost:5001/api/report/delete/${record._id}`);
+//       await axios.delete(`https://r-backend-2.onrender.com/api/report/delete/${record._id}`);
 //       message.success("Report deleted successfully.");
 //       fetchReports(); // Refresh table
 //     } catch (error) {
@@ -254,7 +254,7 @@ const AdminReportsTable = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:5001/api/report/getAllReports"
+        "https://r-backend-2.onrender.com/api/report/getAllReports"
       );
     //   const formatted = response.data.map((report, index) => ({
     //     key: report._id || index,
@@ -290,7 +290,7 @@ const AdminReportsTable = () => {
     try {
       const values = await form.validateFields();
       await axios.put(
-        `http://localhost:5001/api/report/update/${currentRecord._id}`,
+        `https://r-backend-2.onrender.com/api/report/update/${currentRecord._id}`,
         {
           ...values,
           date: values.date.toISOString(),
@@ -315,7 +315,7 @@ const AdminReportsTable = () => {
   const handleDelete = async (record) => {
     try {
       await axios.delete(
-        `http://localhost:5001/api/report/delete/${record._id}`
+        `https://r-backend-2.onrender.com/api/report/delete/${record._id}`
       );
       message.success("Report deleted successfully.");
       fetchReports(); // Refresh table
