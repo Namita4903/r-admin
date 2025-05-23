@@ -209,8 +209,8 @@ const Admin = () => {
         return <Users />;
       case "dashboard":
         return <Dashboard/>
-      case "doctors":
-        return <h2>Doctors Section (To be implemented)</h2>;
+      // case "doctors":
+      //   return <h2>Doctors Section (To be implemented)</h2>;
       case "appointments":
         return <AdminAppointments/>
       case "reports":

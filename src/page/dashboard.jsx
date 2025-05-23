@@ -28,9 +28,9 @@ const monthlyRegistrations = [
 ];
 
 const recentUsers = [
-  { key: "1", name: "Namita Mahajan", email: "namita@example.com", role: "User" },
-  { key: "2", name: "Dr. Rakesh Kumar", email: "rakesh@hospital.com", role: "Doctor" },
-  { key: "3", name: "Mantan Sharma", email: "mantan@domain.com", role: "User" },
+  { key: "1", name: "Anu Gupta", email: "anugupta229@gmail.com", role: "Patient" },
+  { key: "2", name: "Priya", email: "priyabarjatia1280@gmail.com", role: "Patient" },
+  { key: "3", name: "Namit", email: "namitamahajan4903@gmail.com", role: "Doctor" },
 ];
 
 const columns = [
