@@ -171,7 +171,7 @@ useEffect(() => {
           </Card>
         </Col>
 
-        <Col span={12}>
+        {/* <Col span={12}>
           <Card title="Monthly Registrations">
             <BarChart width={400} height={300} data={monthlyRegistrations}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -182,7 +182,7 @@ useEffect(() => {
               <Bar dataKey="users" fill="#00b4d8" />
             </BarChart>
           </Card>
-        </Col>
+        </Col> */}
       </Row>
 
       <Card title="Recent Users" style={{ marginTop: 24 }}>
