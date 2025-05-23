@@ -198,7 +198,6 @@
 
 
 
-
 import React, { useState, useEffect } from "react";
 import { Card, Statistic, Row, Col, Table, message } from "antd";
 import {
@@ -208,10 +207,7 @@ import {
   ScheduleOutlined,
 } from "@ant-design/icons";
 import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
+  PieChart, Pie, Cell, Tooltip,
 } from "recharts";
 import axios from "axios";
 
@@ -230,24 +226,17 @@ const columns = [
 ];
 
 const Dashboard = () => {
-  const [patientsCount, setPatientsCount] = useState(0);
-  const [doctorsCount, setDoctorsCount] = useState(0);
+  const [users, setUsers] = useState([]);
   const [reportData, setReportData] = useState([]);
   const [appointment, setAppointments] = useState([]);
 
-  const fetchDashBoardData = async () => {
+  const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getUsers", {
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      const users = response.data;
-      const patients = users.filter(user => user.role === "Patient");
-      const doctors = users.filter(user => user.role === "Doctor");
-
-      setPatientsCount(patients.length);
-      setDoctorsCount(doctors.length);
+      setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
       message.error("Failed to fetch users");
@@ -264,7 +253,7 @@ const Dashboard = () => {
     }
   };
 
-  const fetchUserAppointments = async () => {
+  const fetchAppointments = async () => {
     try {
       const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getAppointment");
       setAppointments(response.data);
@@ -274,14 +263,18 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchDashBoardData();
+    fetchDashboardData();
     fetchReports();
-    fetchUserAppointments();
+    fetchAppointments();
   }, []);
 
+  // Count patients and doctors
+  const totalPatients = users.filter(user => user.role === "Patient").length;
+  const totalDoctors = users.filter(user => user.role === "Doctor").length;
+
   const userStats = [
-    { name: "Patients", value: patientsCount },
-    { name: "Doctors", value: doctorsCount },
+    { name: "Patients", value: totalPatients },
+    { name: "Doctors", value: totalDoctors },
   ];
 
   return (
@@ -291,7 +284,7 @@ const Dashboard = () => {
           <Card>
             <Statistic
               title="Total Patients"
-              value={patientsCount}
+              value={totalPatients}
               prefix={<UserOutlined />}
               valueStyle={{ color: "#3f8600" }}
             />
@@ -301,7 +294,7 @@ const Dashboard = () => {
           <Card>
             <Statistic
               title="Total Doctors"
-              value={doctorsCount}
+              value={totalDoctors}
               prefix={<UsergroupAddOutlined />}
               valueStyle={{ color: "#005f73" }}
             />

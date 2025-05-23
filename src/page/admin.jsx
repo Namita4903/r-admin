@@ -282,11 +282,11 @@ const Admin = () => {
                 icon: <DashboardOutlined />,
               },
               { label: "Users", key: "users", icon: <UserOutlined /> },
-              {
-                label: "Doctors",
-                key: "doctors",
-                icon: <UserOutlined />,
-              },
+              // {
+              //   label: "Doctors",
+              //   key: "doctors",
+              //   icon: <UserOutlined />,
+              // },
               {
                 label: "Appointments",
                 key: "appointments",
