@@ -197,7 +197,6 @@
 
 
 
-
 import React, { useState, useEffect } from "react";
 import { Card, Statistic, Row, Col, Table, message } from "antd";
 import {
@@ -206,9 +205,7 @@ import {
   FileDoneOutlined,
   ScheduleOutlined,
 } from "@ant-design/icons";
-import {
-  PieChart, Pie, Cell, Tooltip,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import axios from "axios";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -228,7 +225,7 @@ const columns = [
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [reportData, setReportData] = useState([]);
-  const [appointment, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   const fetchDashboardData = async () => {
     try {
@@ -236,7 +233,8 @@ const Dashboard = () => {
       const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getUsers", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setUsers(response.data);
+      const usersArray = Array.isArray(response.data.users) ? response.data.users : [];
+      setUsers(usersArray);
     } catch (error) {
       console.error("Error fetching users:", error);
       message.error("Failed to fetch users");
@@ -246,29 +244,29 @@ const Dashboard = () => {
   const fetchReports = async () => {
     try {
       const response = await axios.get("https://r-backend-2.onrender.com/api/report/getAllReports");
-      setReportData(response.data);
+      setReportData(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error fetching reports:", error);
       message.error("Failed to load reports.");
     }
   };
 
-  const fetchAppointments = async () => {
+  const fetchUserAppointments = async () => {
     try {
       const response = await axios.get("https://r-backend-2.onrender.com/api/auth/getAppointment");
-      setAppointments(response.data);
+      setAppointments(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
-      console.error("Error fetching appointments:", error);
+      console.error("Error fetching user appointments:", error);
+      message.error("Failed to load appointments.");
     }
   };
 
   useEffect(() => {
     fetchDashboardData();
     fetchReports();
-    fetchAppointments();
+    fetchUserAppointments();
   }, []);
 
-  // Count patients and doctors
   const totalPatients = users.filter(user => user.role === "Patient").length;
   const totalDoctors = users.filter(user => user.role === "Doctor").length;
 
@@ -304,7 +302,7 @@ const Dashboard = () => {
           <Card>
             <Statistic
               title="Appointments"
-              value={appointment.length}
+              value={appointments.length}
               prefix={<ScheduleOutlined />}
               valueStyle={{ color: "#8338ec" }}
             />
